@@ -11,30 +11,30 @@ namespace EODHistoricalData.NET
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class HistoricalPrice
     {
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public DateTimeOffset Date { get; set; }
 
-        [JsonProperty("open")]
+        [JsonPropertyName("open")]
         public double Open { get; set; }
 
-        [JsonProperty("high")]
+        [JsonPropertyName("high")]
         public double High { get; set; }
 
-        [JsonProperty("low")]
+        [JsonPropertyName("low")]
         public double Low { get; set; }
 
-        [JsonProperty("close")]
+        [JsonPropertyName("close")]
         public double Close { get; set; }
 
-        [JsonProperty("adjusted_close")]
+        [JsonPropertyName("adjusted_close")]
         public double AdjustedClose { get; set; }
 
-        [JsonProperty("volume")]
+        [JsonPropertyName("volume")]
         public long Volume { get; set; }
     }
 

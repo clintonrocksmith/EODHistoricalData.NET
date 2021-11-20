@@ -12,33 +12,33 @@ namespace EODHistoricalData.NET
     using System.Collections.Generic;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class Dividend
     {
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public DateTimeOffset? Date { get; set; }
 
-        [JsonProperty("declarationDate")]
+        [JsonPropertyName("declarationDate")]
         public DateTimeOffset? DeclarationDate { get; set; }
 
-        [JsonProperty("recordDate")]
+        [JsonPropertyName("recordDate")]
         public DateTimeOffset? RecordDate { get; set; }
 
-        [JsonProperty("paymentDate")]
+        [JsonPropertyName("paymentDate")]
         public DateTimeOffset? PaymentDate { get; set; }
 
-        [JsonProperty("period")]
+        [JsonPropertyName("period")]
         public string Period { get; set; }
 
-        [JsonProperty("value")]
+        [JsonPropertyName("value")]
         public string Value { get; set; }
 
-        [JsonProperty("unadjustedValue")]
+        [JsonPropertyName("unadjustedValue")]
         public string UnadjustedValue { get; set; }
 
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Currency { get; set; }
     }
 

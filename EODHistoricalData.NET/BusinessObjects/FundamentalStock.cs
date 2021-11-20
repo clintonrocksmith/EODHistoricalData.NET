@@ -9,60 +9,60 @@
 namespace EODHistoricalData.NET
 {
     using EODHistoricalData.NET.BusinessObjects;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
 
     public partial class FundamentalStock
     {
-        [JsonProperty("General")]
+        [JsonPropertyName("General")]
         public FundamentalGeneral General { get; set; }
 
-        [JsonProperty("Highlights")]
+        [JsonPropertyName("Highlights")]
         public Highlights Highlights { get; set; }
 
-        [JsonProperty("Valuation")]
+        [JsonPropertyName("Valuation")]
         public Valuation Valuation { get; set; }
 
-        [JsonProperty("SharesStats")]
+        [JsonPropertyName("SharesStats")]
         public SharesStats SharesStats { get; set; }
 
-        [JsonProperty("Technicals")]
+        [JsonPropertyName("Technicals")]
         public FundamentalTechnicals Technicals { get; set; }
 
-        [JsonProperty("SplitsDividends")]
+        [JsonPropertyName("SplitsDividends")]
         public SplitsDividends SplitsDividends { get; set; }
 
-        [JsonProperty("outstandingShares")]
+        [JsonPropertyName("outstandingShares")]
         public OutstandingShares OutstandingShares { get; set; }
 
-        [JsonProperty("Earnings")]
+        [JsonPropertyName("Earnings")]
         public Earnings Earnings { get; set; }
 
-        [JsonProperty("Financials")]
+        [JsonPropertyName("Financials")]
         public Financials Financials { get; set; }
     }
 
     public partial class Earnings
     {
-        [JsonProperty("History")]
+        [JsonPropertyName("History")]
         public Dictionary<string, History> History { get; set; }
 
-        [JsonProperty("Annual")]
+        [JsonPropertyName("Annual")]
         public Dictionary<string, Annual> Annual { get; set; }
 
-        [JsonProperty("Trend")]
+        [JsonPropertyName("Trend")]
         public Dictionary<string, Dictionary<string, string>> Trend { get; set; }
     }
 
     public partial class EarningsDetailsBase
     {
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public DateTimeOffset Date { get; set; }
 
-        [JsonProperty("epsActual")]
+        [JsonPropertyName("epsActual")]
         public string EpsActual { get; set; }
     }
 
@@ -73,412 +73,412 @@ namespace EODHistoricalData.NET
 
     public partial class History : EarningsDetailsBase
     {
-        [JsonProperty("reportDate")]
+        [JsonPropertyName("reportDate")]
         public DateTimeOffset? ReportDate { get; set; }
 
-        [JsonProperty("epsEstimate")]
+        [JsonPropertyName("epsEstimate")]
         public string EpsEstimate { get; set; }
 
-        [JsonProperty("epsDifference")]
+        [JsonPropertyName("epsDifference")]
         public string EpsDifference { get; set; }
 
-        [JsonProperty("surprisePercent")]
+        [JsonPropertyName("surprisePercent")]
         public string SurprisePercent { get; set; }
     }
 
     public partial class Financials
     {
-        [JsonProperty("Balance_Sheet")]
+        [JsonPropertyName("Balance_Sheet")]
         public BalanceSheet BalanceSheet { get; set; }
 
-        [JsonProperty("Cash_Flow")]
+        [JsonPropertyName("Cash_Flow")]
         public CashFlow CashFlow { get; set; }
 
-        [JsonProperty("Income_Statement")]
+        [JsonPropertyName("Income_Statement")]
         public IncomeStatement IncomeStatement { get; set; }
     }
 
     public partial class BalanceSheet
     {
-        [JsonProperty("currency_symbol")]
+        [JsonPropertyName("currency_symbol")]
         public string CurrencySymbol { get; set; }
 
-        [JsonProperty("quarterly")]
+        [JsonPropertyName("quarterly")]
         public Dictionary<string, BalanceSheetDetails> Quarterly { get; set; }
 
-        [JsonProperty("yearly")]
+        [JsonPropertyName("yearly")]
         public Dictionary<string, BalanceSheetDetails> Yearly { get; set; }
     }
 
     public partial class CashFlow
     {
-        [JsonProperty("currency_symbol")]
+        [JsonPropertyName("currency_symbol")]
         public string CurrencySymbol { get; set; }
 
-        [JsonProperty("quarterly")]
+        [JsonPropertyName("quarterly")]
         public Dictionary<string, Dictionary<string, string>> Quarterly { get; set; }
 
-        [JsonProperty("yearly")]
+        [JsonPropertyName("yearly")]
         public Dictionary<string, Dictionary<string, string>> Yearly { get; set; }
     }
 
     public partial class IncomeStatement
     {
-        [JsonProperty("currency_symbol")]
+        [JsonPropertyName("currency_symbol")]
         public string CurrencySymbol { get; set; }
 
-        [JsonProperty("quarterly")]
+        [JsonPropertyName("quarterly")]
         public Dictionary<string, Dictionary<string, string>> Quarterly { get; set; }
 
-        [JsonProperty("yearly")]
+        [JsonPropertyName("yearly")]
         public Dictionary<string, Dictionary<string, string>> Yearly { get; set; }
     }
 
     public partial class BalanceSheetDetails
     {
-        [JsonProperty("accountsPayable")]
+        [JsonPropertyName("accountsPayable")]
         public decimal? AccountsPayable { get; set; }
 
-        [JsonProperty("accumulatedAmortization")]
+        [JsonPropertyName("accumulatedAmortization")]
         public decimal? AccumulatedAmortization { get; set; }
 
-        [JsonProperty("accumulatedDepreciation")]
+        [JsonPropertyName("accumulatedDepreciation")]
         public decimal? AccumulatedDepreciation { get; set; }
 
-        [JsonProperty("accumulatedOtherComprehensiveIncome")]
+        [JsonPropertyName("accumulatedOtherComprehensiveIncome")]
         public decimal? AccumulatedOtherComprehensiveIncome { get; set; }
 
-        [JsonProperty("additionalPaidInCapital")]
+        [JsonPropertyName("additionalPaidInCapital")]
         public decimal? AdditionalPaidInCapital { get; set; }
 
-        [JsonProperty("capitalLeaseObligations")]
+        [JsonPropertyName("capitalLeaseObligations")]
         public decimal? CapitalLeaseObligations { get; set; }
 
-        [JsonProperty("capitalSurpluse")]
+        [JsonPropertyName("capitalSurpluse")]
         public decimal? CapitalSurpluse { get; set; }
 
-        [JsonProperty("cash")]
+        [JsonPropertyName("cash")]
         public decimal? Cash { get; set; }
 
-        [JsonProperty("cashAndShortTermInvestments")]
+        [JsonPropertyName("cashAndShortTermInvestments")]
         public decimal? CashAndShortTermInvestments { get; set; }
 
-        [JsonProperty("commonStock")]
+        [JsonPropertyName("commonStock")]
         public decimal? CommonStock { get; set; }
 
-        [JsonProperty("commonStockSharesOutstanding")]
+        [JsonPropertyName("commonStockSharesOutstanding")]
         public decimal? CommonStockSharesOutstanding { get; set; }
 
-        [JsonProperty("commonStockTotalEquity")]
+        [JsonPropertyName("commonStockTotalEquity")]
         public decimal? CommonStockTotalEquity { get; set; }
 
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public DateTime Date { get; set; }
 
-        [JsonProperty("deferredLongTermAssetCharges")]
+        [JsonPropertyName("deferredLongTermAssetCharges")]
         public decimal? DeferredLongTermAssetCharges { get; set; }
 
-        [JsonProperty("deferredLongTermLiab")]
+        [JsonPropertyName("deferredLongTermLiab")]
         public decimal? DeferredLongTermLiab { get; set; }
 
-        [JsonProperty("filing_date")]
+        [JsonPropertyName("filing_date")]
         public DateTime? FilingDate { get; set; }
 
-        [JsonProperty("goodWill")]
+        [JsonPropertyName("goodWill")]
         public decimal? GoodWill { get; set; }
 
-        [JsonProperty("intangibleAssets")]
+        [JsonPropertyName("intangibleAssets")]
         public decimal? IntangibleAssets { get; set; }
 
-        [JsonProperty("inventory")]
+        [JsonPropertyName("inventory")]
         public decimal? Inventory { get; set; }
 
-        [JsonProperty("liabilitiesAndStockholdersEquity")]
+        [JsonPropertyName("liabilitiesAndStockholdersEquity")]
         public decimal? LiabilitiesAndStockholdersEquity { get; set; }
 
-        [JsonProperty("longTermDebt")]
+        [JsonPropertyName("longTermDebt")]
         public decimal? LongTermDebt { get; set; }
 
-        [JsonProperty("longTermDebtTotal")]
+        [JsonPropertyName("longTermDebtTotal")]
         public decimal? LongTermDebtTotal { get; set; }
 
-        [JsonProperty("longTermInvestments")]
+        [JsonPropertyName("longTermInvestments")]
         public decimal? LongTermInvestments { get; set; }
 
-        [JsonProperty("negativeGoodwill")]
+        [JsonPropertyName("negativeGoodwill")]
         public decimal? NegativeGoodwill { get; set; }
 
-        [JsonProperty("netReceivables")]
+        [JsonPropertyName("netReceivables")]
         public decimal? NetReceivables { get; set; }
 
-        [JsonProperty("netTangibleAssets")]
+        [JsonPropertyName("netTangibleAssets")]
         public decimal? NetTangibleAssets { get; set; }
 
-        [JsonProperty("nonCurrentAssetsTotal")]
+        [JsonPropertyName("nonCurrentAssetsTotal")]
         public decimal? NonCurrentAssetsTotal { get; set; }
 
-        [JsonProperty("nonCurrentLiabilitiesOther")]
+        [JsonPropertyName("nonCurrentLiabilitiesOther")]
         public decimal? NonCurrentLiabilitiesOther { get; set; }
 
-        [JsonProperty("nonCurrentLiabilitiesTotal")]
+        [JsonPropertyName("nonCurrentLiabilitiesTotal")]
         public decimal? NonCurrentLiabilitiesTotal { get; set; }
 
-        [JsonProperty("nonCurrrentAssetsOther")]
+        [JsonPropertyName("nonCurrrentAssetsOther")]
         public decimal? NonCurrrentAssetsOther { get; set; }
 
-        [JsonProperty("noncontrollingInterestInConsolidatedEntity")]
+        [JsonPropertyName("noncontrollingInterestInConsolidatedEntity")]
         public decimal? NoncontrollingInterestInConsolidatedEntity { get; set; }
 
-        [JsonProperty("otherAssets")]
+        [JsonPropertyName("otherAssets")]
         public decimal? OtherAssets { get; set; }
 
-        [JsonProperty("otherCurrentAssets")]
+        [JsonPropertyName("otherCurrentAssets")]
         public decimal? OtherCurrentAssets { get; set; }
 
-        [JsonProperty("otherCurrentLiab")]
+        [JsonPropertyName("otherCurrentLiab")]
         public decimal? OtherCurrentLiab { get; set; }
 
-        [JsonProperty("otherLiab")]
+        [JsonPropertyName("otherLiab")]
         public decimal? OtherLiab { get; set; }
 
-        [JsonProperty("otherStockholderEquity")]
+        [JsonPropertyName("otherStockholderEquity")]
         public decimal? OtherStockholderEquity { get; set; }
 
-        [JsonProperty("preferredStockRedeemable")]
+        [JsonPropertyName("preferredStockRedeemable")]
         public decimal? PreferredStockRedeemable { get; set; }
 
-        [JsonProperty("preferredStockTotalEquity")]
+        [JsonPropertyName("preferredStockTotalEquity")]
         public decimal? PreferredStockTotalEquity { get; set; }
 
-        [JsonProperty("propertyPlantAndEquipmentGross")]
+        [JsonPropertyName("propertyPlantAndEquipmentGross")]
         public decimal? PropertyPlantAndEquipmentGross { get; set; }
 
-        [JsonProperty("propertyPlantEquipment")]
+        [JsonPropertyName("propertyPlantEquipment")]
         public decimal? PropertyPlantEquipment { get; set; }
 
-        [JsonProperty("retainedEarnings")]
+        [JsonPropertyName("retainedEarnings")]
         public decimal? RetainedEarnings { get; set; }
 
-        [JsonProperty("retainedEarningsTotalEquity")]
+        [JsonPropertyName("retainedEarningsTotalEquity")]
         public decimal? RetainedEarningsTotalEquity { get; set; }
 
-        [JsonProperty("shortLongTermDebt")]
+        [JsonPropertyName("shortLongTermDebt")]
         public decimal? ShortLongTermDebt { get; set; }
 
-        [JsonProperty("shortTermDebt")]
+        [JsonPropertyName("shortTermDebt")]
         public decimal? ShortTermDebt { get; set; }
 
-        [JsonProperty("shortTermInvestments")]
+        [JsonPropertyName("shortTermInvestments")]
         public decimal? ShortTermInvestments { get; set; }
 
-        [JsonProperty("temporaryEquityRedeemableNoncontrollingInterests")]
+        [JsonPropertyName("temporaryEquityRedeemableNoncontrollingInterests")]
         public decimal? TemporaryEquityRedeemableNoncontrollingInterests { get; set; }
 
-        [JsonProperty("totalAssets")]
+        [JsonPropertyName("totalAssets")]
         public decimal? TotalAssets { get; set; }
 
-        [JsonProperty("totalCurrentAssets")]
+        [JsonPropertyName("totalCurrentAssets")]
         public decimal? TotalCurrentAssets { get; set; }
 
-        [JsonProperty("totalCurrentLiabilities")]
+        [JsonPropertyName("totalCurrentLiabilities")]
         public decimal? TotalCurrentLiabilities { get; set; }
 
-        [JsonProperty("totalLiab")]
+        [JsonPropertyName("totalLiab")]
         public decimal? TotalLiab { get; set; }
 
-        [JsonProperty("totalPermanentEquity")]
+        [JsonPropertyName("totalPermanentEquity")]
         public decimal? TotalPermanentEquity { get; set; }
 
-        [JsonProperty("totalStockholderEquity")]
+        [JsonPropertyName("totalStockholderEquity")]
         public decimal? TotalStockholderEquity { get; set; }
 
-        [JsonProperty("treasuryStock")]
+        [JsonPropertyName("treasuryStock")]
         public decimal? TreasuryStock { get; set; }
 
-        [JsonProperty("warrants")]
+        [JsonPropertyName("warrants")]
         public decimal? Warrants { get; set; }
     }
 
     public partial class Highlights
     {
-        [JsonProperty("MarketCapitalization")]
+        [JsonPropertyName("MarketCapitalization")]
         public long MarketCapitalization { get; set; }
 
-        [JsonProperty("MarketCapitalizationMln")]
+        [JsonPropertyName("MarketCapitalizationMln")]
         public string MarketCapitalizationMln { get; set; }
 
-        [JsonProperty("EBITDA")]
+        [JsonPropertyName("EBITDA")]
         public long Ebitda { get; set; }
 
-        [JsonProperty("PERatio")]
+        [JsonPropertyName("PERatio")]
         public string PeRatio { get; set; }
 
-        [JsonProperty("PEGRatio")]
+        [JsonPropertyName("PEGRatio")]
         public decimal? PegRatio { get; set; }
 
-        [JsonProperty("WallStreetTargetPrice")]
+        [JsonPropertyName("WallStreetTargetPrice")]
         public decimal? WallStreetTargetPrice { get; set; }
 
-        [JsonProperty("BookValue")]
+        [JsonPropertyName("BookValue")]
         public decimal? BookValue { get; set; }
 
-        [JsonProperty("DividendShare")]
+        [JsonPropertyName("DividendShare")]
         public decimal? DividendShare { get; set; }
 
-        [JsonProperty("DividendYield")]
+        [JsonPropertyName("DividendYield")]
         public decimal? DividendYield { get; set; }
 
-        [JsonProperty("EarningsShare")]
+        [JsonPropertyName("EarningsShare")]
         public decimal? EarningsShare { get; set; }
 
-        [JsonProperty("EPSEstimateCurrentYear")]
+        [JsonPropertyName("EPSEstimateCurrentYear")]
         public decimal? EpsEstimateCurrentYear { get; set; }
 
-        [JsonProperty("EPSEstimateNextYear")]
+        [JsonPropertyName("EPSEstimateNextYear")]
         public decimal? EpsEstimateNextYear { get; set; }
 
-        [JsonProperty("EPSEstimateNextQuarter")]
+        [JsonPropertyName("EPSEstimateNextQuarter")]
         public string EpsEstimateNextQuarter { get; set; }
 
-        [JsonProperty("EPSEstimateCurrentQuarter")]
+        [JsonPropertyName("EPSEstimateCurrentQuarter")]
         public decimal? EpsEstimateCurrentQuarter { get; set; }
 
-        [JsonProperty("MostRecentQuarter")]
+        [JsonPropertyName("MostRecentQuarter")]
         public DateTimeOffset? MostRecentQuarter { get; set; }
 
-        [JsonProperty("ProfitMargin")]
+        [JsonPropertyName("ProfitMargin")]
         public decimal? ProfitMargin { get; set; }
 
-        [JsonProperty("OperatingMarginTTM")]
+        [JsonPropertyName("OperatingMarginTTM")]
         public decimal? OperatingMarginTtm { get; set; }
 
-        [JsonProperty("ReturnOnAssetsTTM")]
+        [JsonPropertyName("ReturnOnAssetsTTM")]
         public decimal? ReturnOnAssetsTtm { get; set; }
 
-        [JsonProperty("ReturnOnEquityTTM")]
+        [JsonPropertyName("ReturnOnEquityTTM")]
         public decimal? ReturnOnEquityTtm { get; set; }
 
-        [JsonProperty("RevenueTTM")]
+        [JsonPropertyName("RevenueTTM")]
         public decimal? RevenueTtm { get; set; }
 
-        [JsonProperty("RevenuePerShareTTM")]
+        [JsonPropertyName("RevenuePerShareTTM")]
         public decimal? RevenuePerShareTtm { get; set; }
 
-        [JsonProperty("QuarterlyRevenueGrowthYOY")]
+        [JsonPropertyName("QuarterlyRevenueGrowthYOY")]
         public decimal? QuarterlyRevenueGrowthYoy { get; set; }
 
-        [JsonProperty("GrossProfitTTM")]
+        [JsonPropertyName("GrossProfitTTM")]
         public decimal? GrossProfitTtm { get; set; }
 
-        [JsonProperty("DilutedEpsTTM")]
+        [JsonPropertyName("DilutedEpsTTM")]
         public decimal? DilutedEpsTtm { get; set; }
 
-        [JsonProperty("QuarterlyEarningsGrowthYOY")]
+        [JsonPropertyName("QuarterlyEarningsGrowthYOY")]
         public decimal? QuarterlyEarningsGrowthYoy { get; set; }
     }
 
     public partial class OutstandingShares
     {
-        [JsonProperty("annual")]
+        [JsonPropertyName("annual")]
         public Dictionary<string, EarningAnnual> Annual { get; set; }
 
-        [JsonProperty("quarterly")]
+        [JsonPropertyName("quarterly")]
         public Dictionary<string, EarningAnnual> Quarterly { get; set; }
     }
 
     public partial class EarningAnnual
     {
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public string Date { get; set; }
 
-        [JsonProperty("sharesMln")]
+        [JsonPropertyName("sharesMln")]
         public string SharesMln { get; set; }
     }
 
     public partial class SharesStats
     {
-        [JsonProperty("SharesOutstanding")]
+        [JsonPropertyName("SharesOutstanding")]
         public decimal? SharesOutstanding { get; set; }
 
-        [JsonProperty("SharesFloat")]
+        [JsonPropertyName("SharesFloat")]
         public decimal? SharesFloat { get; set; }
 
-        [JsonProperty("PercentInsiders")]
+        [JsonPropertyName("PercentInsiders")]
         public decimal? PercentInsiders { get; set; }
 
-        [JsonProperty("PercentInstitutions")]
+        [JsonPropertyName("PercentInstitutions")]
         public decimal? PercentInstitutions { get; set; }
 
-        [JsonProperty("SharesShort")]
+        [JsonPropertyName("SharesShort")]
         public decimal? SharesShort { get; set; }
 
-        [JsonProperty("SharesShortPriorMonth")]
+        [JsonPropertyName("SharesShortPriorMonth")]
         public decimal? SharesShortPriorMonth { get; set; }
 
-        [JsonProperty("ShortRatio")]
+        [JsonPropertyName("ShortRatio")]
         public decimal? ShortRatio { get; set; }
 
-        [JsonProperty("ShortPercentOutstanding")]
+        [JsonPropertyName("ShortPercentOutstanding")]
         public decimal? ShortPercentOutstanding { get; set; }
 
-        [JsonProperty("ShortPercentFloat")]
+        [JsonPropertyName("ShortPercentFloat")]
         public decimal? ShortPercentFloat { get; set; }
     }
 
     public partial class SplitsDividends
     {
-        [JsonProperty("ForwardAnnualDividendRate")]
+        [JsonPropertyName("ForwardAnnualDividendRate")]
         public decimal? ForwardAnnualDividendRate { get; set; }
 
-        [JsonProperty("ForwardAnnualDividendYield")]
+        [JsonPropertyName("ForwardAnnualDividendYield")]
         public decimal? ForwardAnnualDividendYield { get; set; }
 
-        [JsonProperty("PayoutRatio")]
+        [JsonPropertyName("PayoutRatio")]
         public decimal? PayoutRatio { get; set; }
 
-        [JsonProperty("DividendDate")]
+        [JsonPropertyName("DividendDate")]
         public DateTimeOffset? DividendDate { get; set; }
 
-        [JsonProperty("ExDividendDate")]
+        [JsonPropertyName("ExDividendDate")]
         public DateTimeOffset? ExDividendDate { get; set; }
 
-        [JsonProperty("LastSplitFactor")]
+        [JsonPropertyName("LastSplitFactor")]
         public string LastSplitFactor { get; set; }
 
-        [JsonProperty("LastSplitDate")]
+        [JsonPropertyName("LastSplitDate")]
         public DateTimeOffset? LastSplitDate { get; set; }
 
-        [JsonProperty("NumberDividendsByYear")]
+        [JsonPropertyName("NumberDividendsByYear")]
         public Dictionary<string, NumberDividendsByYear> NumberDividendsByYear { get; set; }
     }
 
     public partial class NumberDividendsByYear
     {
-        [JsonProperty("Year")]
+        [JsonPropertyName("Year")]
         public long Year { get; set; }
 
-        [JsonProperty("Count")]
+        [JsonPropertyName("Count")]
         public long Count { get; set; }
     }
 
     public partial class Valuation
     {
-        [JsonProperty("TrailingPE")]
+        [JsonPropertyName("TrailingPE")]
         public decimal? TrailingPe { get; set; }
 
-        [JsonProperty("ForwardPE")]
+        [JsonPropertyName("ForwardPE")]
         public decimal? ForwardPe { get; set; }
 
-        [JsonProperty("PriceSalesTTM")]
+        [JsonPropertyName("PriceSalesTTM")]
         public decimal? PriceSalesTtm { get; set; }
 
-        [JsonProperty("PriceBookMRQ")]
+        [JsonPropertyName("PriceBookMRQ")]
         public decimal? PriceBookMrq { get; set; }
 
-        [JsonProperty("EnterpriseValueRevenue")]
+        [JsonPropertyName("EnterpriseValueRevenue")]
         public decimal? EnterpriseValueRevenue { get; set; }
 
-        [JsonProperty("EnterpriseValueEbitda")]
+        [JsonPropertyName("EnterpriseValueEbitda")]
         public decimal? EnterpriseValueEbitda { get; set; }
     }
 

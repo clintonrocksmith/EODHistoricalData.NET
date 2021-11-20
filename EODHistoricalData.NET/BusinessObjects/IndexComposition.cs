@@ -13,33 +13,33 @@ namespace EODHistoricalData.NET
 
     using System.Globalization;
     using EODHistoricalData.NET.BusinessObjects;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class IndexComposition
     {
-        [JsonProperty("General")]
+        [JsonPropertyName("General")]
         public FundamentalGeneral General { get; set; }
 
-        [JsonProperty("Components")]
+        [JsonPropertyName("Components")]
         public Dictionary<string, Component> Components { get; set; }
     }
 
     public partial class Component
     {
-        [JsonProperty("Code")]
+        [JsonPropertyName("Code")]
         public string Code { get; set; }
 
-        [JsonProperty("Exchange")]
+        [JsonPropertyName("Exchange")]
         public string Exchange { get; set; }
 
-        [JsonProperty("Name")]
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
 
-        [JsonProperty("Sector")]
+        [JsonPropertyName("Sector")]
         public string Sector { get; set; }
 
-        [JsonProperty("Industry")]
+        [JsonPropertyName("Industry")]
         public string Industry { get; set; }
     }
     

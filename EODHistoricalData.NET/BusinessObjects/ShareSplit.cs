@@ -12,15 +12,15 @@ namespace EODHistoricalData.NET
     using System.Collections.Generic;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class ShareSplit
     {
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public DateTimeOffset Date { get; set; }
 
-        [JsonProperty("split")]
+        [JsonPropertyName("split")]
         public string Split { get; set; }
 
         [JsonIgnore]

@@ -12,42 +12,42 @@ namespace EODHistoricalData.NET
     using System.Collections.Generic;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class IncomingSplits
     {
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty("from")]
+        [JsonPropertyName("from")]
         public DateTimeOffset From { get; set; }
 
-        [JsonProperty("to")]
+        [JsonPropertyName("to")]
         public DateTimeOffset To { get; set; }
 
-        [JsonProperty("splits")]
+        [JsonPropertyName("splits")]
         public List<Split> Splits { get; set; }
     }
 
     public partial class Split
     {
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
-        [JsonProperty("split_date")]
+        [JsonPropertyName("split_date")]
         public DateTimeOffset? SplitDate { get; set; }
 
-        [JsonProperty("optionable")]
+        [JsonPropertyName("optionable")]
         public Optionable Optionable { get; set; }
 
-        [JsonProperty("old_shares")]
+        [JsonPropertyName("old_shares")]
         public long OldShares { get; set; }
 
-        [JsonProperty("new_shares")]
+        [JsonPropertyName("new_shares")]
         public long NewShares { get; set; }
     }
 

@@ -12,120 +12,120 @@ namespace EODHistoricalData.NET
     using System.Collections.Generic;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class Options
     {
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
-        [JsonProperty("exchange")]
+        [JsonPropertyName("exchange")]
         public string Exchange { get; set; }
         
-        [JsonProperty("lastTradeDate")]
+        [JsonPropertyName("lastTradeDate")]
         public DateTime? LastTradeDate { get; set; }
         
-        [JsonProperty("lastTradePrice")]
+        [JsonPropertyName("lastTradePrice")]
         public decimal? LastTradePrice { get; set; }
 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public List<Datum> Data { get; set; }
     }
 
     public partial class Datum
     {
-        [JsonProperty("expirationDate")]
+        [JsonPropertyName("expirationDate")]
         public DateTimeOffset? ExpirationDate { get; set; }
 
-        [JsonProperty("options")]
+        [JsonPropertyName("options")]
         public OptionsClass Options { get; set; }
     }
 
     public partial class OptionsClass
     {
-        [JsonProperty("CALL")]
+        [JsonPropertyName("CALL")]
         public List<Characteristics> Call { get; set; }
 
-        [JsonProperty("PUT")]
+        [JsonPropertyName("PUT")]
         public List<Characteristics> Put { get; set; }
     }
 
     public partial class Characteristics
     {
-        [JsonProperty("contractName")]
+        [JsonPropertyName("contractName")]
         public string ContractName { get; set; }
 
-        [JsonProperty("contractSize")]
+        [JsonPropertyName("contractSize")]
         public ContractSize ContractSize { get; set; }
 
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Currency { get; set; }
 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public OptionsTypeEnum OptionType { get; set; }
 
-        [JsonProperty("inTheMoney")]
+        [JsonPropertyName("inTheMoney")]
         public bool InTheMoney { get; set; }
 
-        [JsonProperty("lastTradeDateTime")]
+        [JsonPropertyName("lastTradeDateTime")]
         public string LastTradeDateTimeString { get; set; }
 
-        [JsonProperty("expirationDate")]
+        [JsonPropertyName("expirationDate")]
         public DateTimeOffset? ExpirationDate { get; set; }
 
-        [JsonProperty("strike")]
+        [JsonPropertyName("strike")]
         public decimal Strike { get; set; }
 
-        [JsonProperty("lastPrice")]
+        [JsonPropertyName("lastPrice")]
         public decimal? LastPrice { get; set; }
 
-        [JsonProperty("bid")]
+        [JsonPropertyName("bid")]
         public decimal? Bid { get; set; }
 
-        [JsonProperty("ask")]
+        [JsonPropertyName("ask")]
         public decimal? Ask { get; set; }
 
-        [JsonProperty("change")]
+        [JsonPropertyName("change")]
         public decimal? Change { get; set; }
 
-        [JsonProperty("changePercent")]
+        [JsonPropertyName("changePercent")]
         public decimal? ChangePercent { get; set; }
 
-        [JsonProperty("volume")]
+        [JsonPropertyName("volume")]
         public long? Volume { get; set; }
 
-        [JsonProperty("openInterest")]
+        [JsonPropertyName("openInterest")]
         public long? OpenInterest { get; set; }
 
-        [JsonProperty("impliedVolatility")]
+        [JsonPropertyName("impliedVolatility")]
         public decimal? ImpliedVolatility { get; set; }
 
-        [JsonProperty("delta")]
+        [JsonPropertyName("delta")]
         public decimal Delta { get; set; }
 
-        [JsonProperty("gamma")]
+        [JsonPropertyName("gamma")]
         public decimal Gamma { get; set; }
 
-        [JsonProperty("theta")]
+        [JsonPropertyName("theta")]
         public decimal Theta { get; set; }
 
-        [JsonProperty("vega")]
+        [JsonPropertyName("vega")]
         public decimal Vega { get; set; }
 
-        [JsonProperty("rho")]
+        [JsonPropertyName("rho")]
         public decimal Rho { get; set; }
 
-        [JsonProperty("theoretical")]
+        [JsonPropertyName("theoretical")]
         public decimal Theoretical { get; set; }
 
-        [JsonProperty("intrinsicValue")]
+        [JsonPropertyName("intrinsicValue")]
         public decimal IntrinsicValue { get; set; }
 
-        [JsonProperty("timeValue")]
+        [JsonPropertyName("timeValue")]
         public decimal TimeValue { get; set; }
 
-        [JsonProperty("updatedAt")]
+        [JsonPropertyName("updatedAt")]
         public DateTimeOffset UpdatedAt { get; set; }
 
         [JsonIgnore]

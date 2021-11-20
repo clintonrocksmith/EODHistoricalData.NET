@@ -12,48 +12,48 @@ namespace EODHistoricalData.NET
     using System.Collections.Generic;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class Earnings
     {
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty("from")]
+        [JsonPropertyName("from")]
         public DateTimeOffset? From { get; set; }
 
-        [JsonProperty("to")]
+        [JsonPropertyName("to")]
         public DateTimeOffset? To { get; set; }
 
-        [JsonProperty("earnings")]
+        [JsonPropertyName("earnings")]
         public List<Earning> EarningsData { get; set; }
     }
 
     public partial class Earning
     {
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
-        [JsonProperty("report_date")]
+        [JsonPropertyName("report_date")]
         public DateTimeOffset? ReportDate { get; set; }
 
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public string DateString { get; set; }
 
-        [JsonProperty("actual")]
+        [JsonPropertyName("actual")]
         public double? Actual { get; set; }
 
-        [JsonProperty("estimate")]
+        [JsonPropertyName("estimate")]
         public double? Estimate { get; set; }
 
-        [JsonProperty("difference")]
+        [JsonPropertyName("difference")]
         public double Difference { get; set; }
 
-        [JsonProperty("percent")]
+        [JsonPropertyName("percent")]
         public double? Percent { get; set; }
 
         public DateTime? Date { get; set; }

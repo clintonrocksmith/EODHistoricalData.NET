@@ -12,30 +12,30 @@ namespace EODHistoricalData.NET
     using System.Collections.Generic;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class Instrument
     {
-        [JsonProperty("Code")]
+        [JsonPropertyName("Code")]
         public string Code { get; set; }
 
-        [JsonProperty("Name")]
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
 
-        [JsonProperty("Country")]
+        [JsonPropertyName("Country")]
         public string Country { get; set; }
 
-        [JsonProperty("Exchange")]
+        [JsonPropertyName("Exchange")]
         public string Exchange { get; set; }
 
-        [JsonProperty("Currency")]
+        [JsonPropertyName("Currency")]
         public string Currency { get; set; }
 
-        [JsonProperty("Type")]
+        [JsonPropertyName("Type")]
         public string Type { get; set; }
         
-        [JsonProperty("Isin")]
+        [JsonPropertyName("Isin")]
         public string Isin { get; set; }
     }
     

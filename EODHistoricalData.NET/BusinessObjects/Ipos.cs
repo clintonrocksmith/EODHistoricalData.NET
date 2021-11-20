@@ -12,63 +12,63 @@ namespace EODHistoricalData.NET
     using System.Collections.Generic;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class Ipos
     {
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty("from")]
+        [JsonPropertyName("from")]
         public DateTimeOffset From { get; set; }
 
-        [JsonProperty("to")]
+        [JsonPropertyName("to")]
         public DateTimeOffset To { get; set; }
 
-        [JsonProperty("ipos")]
+        [JsonPropertyName("ipos")]
         public List<Ipo> IposData { get; set; }
     }
 
     public partial class Ipo
     {
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonProperty("exchange")]
+        [JsonPropertyName("exchange")]
         public string Exchange { get; set; }
 
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Currency { get; set; }
 
-        [JsonProperty("start_date")]
+        [JsonPropertyName("start_date")]
         public DateTimeOffset? StartDate { get; set; }
 
-        [JsonProperty("filing_date")]
+        [JsonPropertyName("filing_date")]
         public DateTimeOffset? FilingDate { get; set; }
 
-        [JsonProperty("amended_date")]
+        [JsonPropertyName("amended_date")]
         public DateTimeOffset? AmendedDate { get; set; }
 
-        [JsonProperty("price_from")]
+        [JsonPropertyName("price_from")]
         public double PriceFrom { get; set; }
 
-        [JsonProperty("price_to")]
+        [JsonPropertyName("price_to")]
         public double PriceTo { get; set; }
 
-        [JsonProperty("offer_price")]
+        [JsonPropertyName("offer_price")]
         public double OfferPrice { get; set; }
 
-        [JsonProperty("shares")]
+        [JsonPropertyName("shares")]
         public long Shares { get; set; }
 
-        [JsonProperty("deal_type")]
+        [JsonPropertyName("deal_type")]
         public DealType DealType { get; set; }
     }
 

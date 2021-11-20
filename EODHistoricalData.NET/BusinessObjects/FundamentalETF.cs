@@ -13,258 +13,258 @@ namespace EODHistoricalData.NET
 
     using System.Globalization;
     using EODHistoricalData.NET.BusinessObjects;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public partial class FundamentalETF
     {
-        [JsonProperty("General")]
+        [JsonPropertyName("General")]
         public FundamentalGeneral General { get; set; }
 
-        [JsonProperty("Technicals")]
+        [JsonPropertyName("Technicals")]
         public FundamentalTechnicals Technicals { get; set; }
 
-        [JsonProperty("ETF_Data")]
+        [JsonPropertyName("ETF_Data")]
         public EtfData EtfData { get; set; }
     }
 
     public partial class EtfData
     {
-        [JsonProperty("ISIN")]
+        [JsonPropertyName("ISIN")]
         public string Isin { get; set; }
 
-        [JsonProperty("Company_Name")]
+        [JsonPropertyName("Company_Name")]
         public string CompanyName { get; set; }
 
-        [JsonProperty("Company_URL")]
+        [JsonPropertyName("Company_URL")]
         public Uri CompanyUrl { get; set; }
 
-        [JsonProperty("ETF_URL")]
+        [JsonPropertyName("ETF_URL")]
         public Uri EtfUrl { get; set; }
 
-        [JsonProperty("Yield")]
+        [JsonPropertyName("Yield")]
         public decimal? Yield { get; set; }
 
-        [JsonProperty("Dividend_Paying_Frequency")]
+        [JsonPropertyName("Dividend_Paying_Frequency")]
         public string DividendPayingFrequency { get; set; }
 
-        [JsonProperty("Inception_Date")]
+        [JsonPropertyName("Inception_Date")]
         public DateTimeOffset? InceptionDate { get; set; }
 
-        [JsonProperty("Max_Annual_Mgmt_Charge")]
+        [JsonPropertyName("Max_Annual_Mgmt_Charge")]
         public decimal? MaxAnnualMgmtCharge { get; set; }
 
-        [JsonProperty("Ongoing_Charge")]
+        [JsonPropertyName("Ongoing_Charge")]
         public decimal? OngoingCharge { get; set; }
 
-        [JsonProperty("Date_Ongoing_Charge")]
+        [JsonPropertyName("Date_Ongoing_Charge")]
         public string DateOngoingCharge { get; set; }
 
-        [JsonProperty("NetExpenseRatio")]
+        [JsonPropertyName("NetExpenseRatio")]
         public decimal? NetExpenseRatio { get; set; }
 
-        [JsonProperty("AnnualHoldingsTurnover")]
+        [JsonPropertyName("AnnualHoldingsTurnover")]
         public decimal? AnnualHoldingsTurnover { get; set; }
 
-        [JsonProperty("TotalAssets")]
+        [JsonPropertyName("TotalAssets")]
         public decimal? TotalAssets { get; set; }
 
-        [JsonProperty("Average_Mkt_Cap_Mil")]
+        [JsonPropertyName("Average_Mkt_Cap_Mil")]
         public string AverageMktCapMil { get; set; }
 
-        [JsonProperty("Market_Capitalisation")]
+        [JsonPropertyName("Market_Capitalisation")]
         public MarketCapitalisation MarketCapitalisation { get; set; }
 
-        [JsonProperty("Asset_Allocation")]
+        [JsonPropertyName("Asset_Allocation")]
         public AssetAllocation AssetAllocation { get; set; }
 
-        [JsonProperty("World_Regions")]
+        [JsonPropertyName("World_Regions")]
         public Dictionary<string, AllocWeight> WorldRegions { get; set; }
 
-        [JsonProperty("Sector_Weights")]
+        [JsonPropertyName("Sector_Weights")]
         public Dictionary<string, AllocWeight> SectorWeights { get; set; }
 
-        [JsonProperty("Top_10_Holdings")]
+        [JsonPropertyName("Top_10_Holdings")]
         public Dictionary<string, Holding> Top10_Holdings { get; set; }
 
-        [JsonProperty("Holdings")]
+        [JsonPropertyName("Holdings")]
         public Dictionary<string, Holding> Holdings { get; set; }
 
-        [JsonProperty("Valuations_Growth")]
+        [JsonPropertyName("Valuations_Growth")]
         public ValuationsGrowth ValuationsGrowth { get; set; }
 
-        [JsonProperty("MorningStar")]
+        [JsonPropertyName("MorningStar")]
         public MorningStar MorningStar { get; set; }
 
-        [JsonProperty("Performance")]
+        [JsonPropertyName("Performance")]
         public Performance Performance { get; set; }
     }
 
     public partial class AssetAllocation
     {
-        [JsonProperty("Stock")]
+        [JsonPropertyName("Stock")]
         public Allocation Stock { get; set; }
 
-        [JsonProperty("Bond")]
+        [JsonPropertyName("Bond")]
         public Allocation Bond { get; set; }
 
-        [JsonProperty("Property")]
+        [JsonPropertyName("Property")]
         public Allocation Property { get; set; }
 
-        [JsonProperty("Cash")]
+        [JsonPropertyName("Cash")]
         public Allocation Cash { get; set; }
 
-        [JsonProperty("Other")]
+        [JsonPropertyName("Other")]
         public Allocation Other { get; set; }
     }
 
     public partial class Allocation
     {
-        [JsonProperty("Long_ % ")]
+        [JsonPropertyName("Long_ % ")]
         public decimal? Long { get; set; }
 
-        [JsonProperty("Short_ % ")]
+        [JsonPropertyName("Short_ % ")]
         public decimal? Short { get; set; }
 
-        [JsonProperty("Net_Assets_ % ")]
+        [JsonPropertyName("Net_Assets_ % ")]
         public decimal? NetAssets { get; set; }
     }
 
     public partial class Holding
     {
-        [JsonProperty("Code")]
+        [JsonPropertyName("Code")]
         public string Code { get; set; }
 
-        [JsonProperty("Name")]
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
 
-        [JsonProperty("Sector")]
+        [JsonPropertyName("Sector")]
         public string Sector { get; set; }
 
-        [JsonProperty("Industry")]
+        [JsonPropertyName("Industry")]
         public string Industry { get; set; }
 
-        [JsonProperty("Country")]
+        [JsonPropertyName("Country")]
         public string Country { get; set; }
 
-        [JsonProperty("Region")]
+        [JsonPropertyName("Region")]
         public string Region { get; set; }
 
-        [JsonProperty("Assets_ % ")]
+        [JsonPropertyName("Assets_ % ")]
         public decimal? Assets { get; set; }
     }
 
     public partial class MarketCapitalisation
     {
-        [JsonProperty("Mega")]
+        [JsonPropertyName("Mega")]
         public decimal? Mega { get; set; }
 
-        [JsonProperty("Big")]
+        [JsonPropertyName("Big")]
         public decimal? Big { get; set; }
 
-        [JsonProperty("Medium")]
+        [JsonPropertyName("Medium")]
         public decimal? Medium { get; set; }
 
-        [JsonProperty("Small")]
+        [JsonPropertyName("Small")]
         public decimal? Small { get; set; }
 
-        [JsonProperty("Micro")]
+        [JsonPropertyName("Micro")]
         public decimal? Micro { get; set; }
     }
 
     public partial class MorningStar
     {
-        [JsonProperty("Ratio")]
+        [JsonPropertyName("Ratio")]
         public long Ratio { get; set; }
 
-        [JsonProperty("Category_Benchmark")]
+        [JsonPropertyName("Category_Benchmark")]
         public string CategoryBenchmark { get; set; }
 
-        [JsonProperty("Sustainability_Ratio")]
+        [JsonPropertyName("Sustainability_Ratio")]
         public long SustainabilityRatio { get; set; }
     }
 
     public partial class Performance
     {
-        [JsonProperty("3y_Volatility")]
+        [JsonPropertyName("3y_Volatility")]
         public decimal? The3YVolatility { get; set; }
 
-        [JsonProperty("3y_ExpReturn")]
+        [JsonPropertyName("3y_ExpReturn")]
         public decimal? The3YExpReturn { get; set; }
 
-        [JsonProperty("3y_SharpRatio")]
+        [JsonPropertyName("3y_SharpRatio")]
         public decimal? The3YSharpRatio { get; set; }
 
-        [JsonProperty("Returns_YTD")]
+        [JsonPropertyName("Returns_YTD")]
         public decimal? ReturnsYtd { get; set; }
 
-        [JsonProperty("Returns_3Y")]
+        [JsonPropertyName("Returns_3Y")]
         public decimal? Returns3Y { get; set; }
 
-        [JsonProperty("Returns_5Y")]
+        [JsonPropertyName("Returns_5Y")]
         public decimal? Returns5Y { get; set; }
 
-        [JsonProperty("Returns_10Y")]
+        [JsonPropertyName("Returns_10Y")]
         public decimal? Returns10Y { get; set; }
     }
 
     public partial class AllocWeight
     {
-        [JsonProperty("Equity_ % ")]
+        [JsonPropertyName("Equity_ % ")]
         public decimal? Equity { get; set; }
 
-        [JsonProperty("Relative_to_Category")]
+        [JsonPropertyName("Relative_to_Category")]
         public decimal? RelativeToCategory { get; set; }
     }
 
     public partial class ValuationsGrowth
     {
-        [JsonProperty("Valuations_Rates_Portfolio")]
+        [JsonPropertyName("Valuations_Rates_Portfolio")]
         public ValuationsRates ValuationsRatesPortfolio { get; set; }
 
-        [JsonProperty("Valuations_Rates_To_Category")]
+        [JsonPropertyName("Valuations_Rates_To_Category")]
         public ValuationsRates ValuationsRatesToCategory { get; set; }
 
-        [JsonProperty("Growth_Rates_Portfolio")]
+        [JsonPropertyName("Growth_Rates_Portfolio")]
         public GrowthRates GrowthRatesPortfolio { get; set; }
 
-        [JsonProperty("Growth_Rates_To_Category")]
+        [JsonPropertyName("Growth_Rates_To_Category")]
         public GrowthRates GrowthRatesToCategory { get; set; }
     }
 
     public partial class GrowthRates
     {
-        [JsonProperty("Long-Term Projected Earnings Growth")]
+        [JsonPropertyName("Long-Term Projected Earnings Growth")]
         public decimal? LongTermProjectedEarningsGrowth { get; set; }
 
-        [JsonProperty("Historical Earnings Growth")]
+        [JsonPropertyName("Historical Earnings Growth")]
         public decimal? HistoricalEarningsGrowth { get; set; }
 
-        [JsonProperty("Sales Growth")]
+        [JsonPropertyName("Sales Growth")]
         public decimal? SalesGrowth { get; set; }
 
-        [JsonProperty("Cash-Flow Growth")]
+        [JsonPropertyName("Cash-Flow Growth")]
         public decimal? CashFlowGrowth { get; set; }
 
-        [JsonProperty("Book-Value Growth")]
+        [JsonPropertyName("Book-Value Growth")]
         public decimal? BookValueGrowth { get; set; }
     }
 
     public partial class ValuationsRates
     {
-        [JsonProperty("Price/Prospective Earnings")]
+        [JsonPropertyName("Price/Prospective Earnings")]
         public decimal? PriceProspectiveEarnings { get; set; }
 
-        [JsonProperty("Price/Book")]
+        [JsonPropertyName("Price/Book")]
         public decimal? PriceBook { get; set; }
 
-        [JsonProperty("Price/Sales")]
+        [JsonPropertyName("Price/Sales")]
         public decimal? PriceSales { get; set; }
 
-        [JsonProperty("Price/Cash Flow")]
+        [JsonPropertyName("Price/Cash Flow")]
         public decimal? PriceCashFlow { get; set; }
 
-        [JsonProperty("Dividend-Yield Factor")]
+        [JsonPropertyName("Dividend-Yield Factor")]
         public decimal? DividendYieldFactor { get; set; }
     }
     

@@ -1,34 +1,34 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 
 namespace EODHistoricalData.NET.BusinessObjects
 {
     public class FundamentalTechnicals
     {
-        [JsonProperty("Beta")]
+        [JsonPropertyName("Beta")]
         public decimal? Beta { get; set; }
 
-        [JsonProperty("52WeekHigh")]
+        [JsonPropertyName("52WeekHigh")]
         public decimal? The52WeekHigh { get; set; }
 
-        [JsonProperty("52WeekLow")]
+        [JsonPropertyName("52WeekLow")]
         public decimal? The52WeekLow { get; set; }
 
-        [JsonProperty("50DayMA")]
+        [JsonPropertyName("50DayMA")]
         public decimal? The50DayMa { get; set; }
 
-        [JsonProperty("200DayMA")]
+        [JsonPropertyName("200DayMA")]
         public decimal? The200DayMa { get; set; }
 
-        [JsonProperty("SharesShort")]
+        [JsonPropertyName("SharesShort")]
         public decimal? SharesShort { get; set; }
 
-        [JsonProperty("SharesShortPriorMonth")]
+        [JsonPropertyName("SharesShortPriorMonth")]
         public decimal? SharesShortPriorMonth { get; set; }
 
-        [JsonProperty("ShortRatio")]
+        [JsonPropertyName("ShortRatio")]
         public decimal? ShortRatio { get; set; }
 
-        [JsonProperty("ShortPercent")]
+        [JsonPropertyName("ShortPercent")]
         public decimal? ShortPercent { get; set; }
     }
 }

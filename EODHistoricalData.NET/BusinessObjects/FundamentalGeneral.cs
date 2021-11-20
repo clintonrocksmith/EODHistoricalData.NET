@@ -1,104 +1,104 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System;
 
 namespace EODHistoricalData.NET.BusinessObjects
 {
     public class FundamentalGeneral
     {
-        [JsonProperty("Code")]
+        [JsonPropertyName("Code")]
         public string Code { get; set; }
 
-        [JsonProperty("Type")]
+        [JsonPropertyName("Type")]
         public string Type { get; set; }
 
-        [JsonProperty("Name")]
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
 
-        [JsonProperty("Exchange")]
+        [JsonPropertyName("Exchange")]
         public string Exchange { get; set; }
 
-        [JsonProperty("CurrencyCode")]
+        [JsonPropertyName("CurrencyCode")]
         public string CurrencyCode { get; set; }
 
-        [JsonProperty("CurrencyName")]
+        [JsonPropertyName("CurrencyName")]
         public string CurrencyName { get; set; }
 
-        [JsonProperty("CurrencySymbol")]
+        [JsonPropertyName("CurrencySymbol")]
         public string CurrencySymbol { get; set; }
 
-        [JsonProperty("CountryName")]
+        [JsonPropertyName("CountryName")]
         public string CountryName { get; set; }
 
-        [JsonProperty("CountryISO")]
+        [JsonPropertyName("CountryISO")]
         public string CountryIso { get; set; }
 
-        [JsonProperty("ISIN")]
+        [JsonPropertyName("ISIN")]
         public string Isin { get; set; }
 
-        [JsonProperty("CUSIP")]
+        [JsonPropertyName("CUSIP")]
         public string Cusip { get; set; }
 
-        [JsonProperty("Fund_Summary")]
+        [JsonPropertyName("Fund_Summary")]
         public string FundSummary { get; set; }
 
-        [JsonProperty("Fund_Family")]
+        [JsonPropertyName("Fund_Family")]
         public string FundFamily { get; set; }
 
-        [JsonProperty("Fiscal_Year_End")]
+        [JsonPropertyName("Fiscal_Year_End")]
         public string FiscalYearEnd { get; set; }
 
-        [JsonProperty("Description")]
+        [JsonPropertyName("Description")]
         public string Description { get; set; }
 
-        [JsonProperty("Category")]
+        [JsonPropertyName("Category")]
         public string Category { get; set; }
 
-        [JsonProperty("CIK")]
+        [JsonPropertyName("CIK")]
         public string Cik { get; set; }
 
-        [JsonProperty("EmployerIdNumber")]
+        [JsonPropertyName("EmployerIdNumber")]
         public string EmployerIdNumber { get; set; }
 
-        [JsonProperty("IPODate")]
+        [JsonPropertyName("IPODate")]
         public DateTimeOffset? IpoDate { get; set; }
 
-        [JsonProperty("InternationalDomestic")]
+        [JsonPropertyName("InternationalDomestic")]
         public string InternationalDomestic { get; set; }
 
-        [JsonProperty("Sector")]
+        [JsonPropertyName("Sector")]
         public string Sector { get; set; }
 
-        [JsonProperty("Industry")]
+        [JsonPropertyName("Industry")]
         public string Industry { get; set; }
 
-        [JsonProperty("GicSector")]
+        [JsonPropertyName("GicSector")]
         public string GicSector { get; set; }
 
-        [JsonProperty("GicGroup")]
+        [JsonPropertyName("GicGroup")]
         public string GicGroup { get; set; }
 
-        [JsonProperty("GicIndustry")]
+        [JsonPropertyName("GicIndustry")]
         public string GicIndustry { get; set; }
 
-        [JsonProperty("GicSubIndustry")]
+        [JsonPropertyName("GicSubIndustry")]
         public string GicSubIndustry { get; set; }
         
-        [JsonProperty("Address")]
+        [JsonPropertyName("Address")]
         public string Address { get; set; }
 
-        [JsonProperty("Phone")]
+        [JsonPropertyName("Phone")]
         public string Phone { get; set; }
 
-        [JsonProperty("WebURL")]
+        [JsonPropertyName("WebURL")]
         public string WebUrl { get; set; }
 
-        [JsonProperty("LogoURL")]
+        [JsonPropertyName("LogoURL")]
         public string LogoUrl { get; set; }
 
-        [JsonProperty("FullTimeEmployees")]
+        [JsonPropertyName("FullTimeEmployees")]
         public long FullTimeEmployees { get; set; }
 
-        [JsonProperty("UpdatedAt")]
+        [JsonPropertyName("UpdatedAt")]
         public DateTimeOffset UpdatedAt { get; set; }
     }
 }

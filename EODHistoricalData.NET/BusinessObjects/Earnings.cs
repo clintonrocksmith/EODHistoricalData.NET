@@ -63,7 +63,7 @@ namespace EODHistoricalData.NET
     {
         public static Earnings FromJson(string json)
         {
-            Earnings result = JsonConvert.DeserializeObject<Earnings>(json, EODHistoricalData.NET.ConverterEarnings.Settings);
+            Earnings result = JsonSerializer.Deserialize<Earnings>(json, EODHistoricalData.NET.ConverterEarnings.Settings);
             foreach (Earning earning in result.EarningsData)
             {
                 if (!earning.DateString.StartsWith("0000"))
@@ -75,13 +75,13 @@ namespace EODHistoricalData.NET
 
     public static class SerializeEarnings
     {
-        public static string ToJson(this Earnings self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterEarnings.Settings);
+        public static string ToJson(this Earnings self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterEarnings.Settings);
     }
 
     internal static class ConverterEarnings
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,

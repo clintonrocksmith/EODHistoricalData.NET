@@ -12,6 +12,9 @@ namespace EODHistoricalData.NET
         private const string HistoricalDataUrl = "https://eodhistoricaldata.com/api/eod/{0}?{2}&api_token={1}&fmt=json";
         private const string RealTimeDataUrl = "https://eodhistoricaldata.com/api/real-time/{0}?&api_token={1}&fmt=json";
 
+        private const string BulkLastDayDataUrl =
+            "https://eodhistoricaldata.com/api/eod-bulk-last-day/{0}?api_token={1}&fmt=json";
+
         internal StockPriceDataAsyncClient(string api, bool useProxy) : base(api, useProxy) { }
 
         internal Task<List<HistoricalPrice>> GetHistoricalPricesAsync(string symbol, DateTime? startDate, DateTime? endDate)
@@ -25,6 +28,19 @@ namespace EODHistoricalData.NET
             return HistoricalPrice.GetListFromJson(await response.Content.ReadAsStringAsync()) ?? new List<HistoricalPrice>();
         }
 
+        internal Task<List<HistoricalExchangePrice>> GetExchangePricesAsync(string exchange, DateTime? date = null)
+        {
+            var sb = date != null
+                ? $"{BulkLastDayDataUrl}&date={date.Value.ToString(EODHistoricalDataAsyncClient.DateFormat)}"
+                : BulkLastDayDataUrl;
+            return ExecuteQueryAsync(string.Format(sb, exchange, _apiToken), GetExchangePricesFromResponseAsync);
+        }
+
+        private async Task<List<HistoricalExchangePrice>> GetExchangePricesFromResponseAsync(HttpResponseMessage response)
+        {
+            return HistoricalExchangePrice.GetListFromJson(await response.Content.ReadAsStringAsync()) ?? new List<HistoricalExchangePrice>();
+        }
+        
         internal Task<List<RealTimePrice>> GetRealTimePricesAsync(string[] symbols)
         {
             var first = symbols[0];

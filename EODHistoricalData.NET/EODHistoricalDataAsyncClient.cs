@@ -35,6 +35,17 @@ namespace EODHistoricalData.NET
             return _stockPriceDataAsyncClient.GetHistoricalPricesAsync(symbol, startDate, endDate);
         }
 
+        public Task<List<HistoricalExchangePrice>> GetExchangeHistoricalPricesAsync(string exchange, DateTime? date = null)
+        {
+            if (exchange == null)
+                throw new ArgumentNullException("Exchange is null, cannot query prices.");
+
+            if (_stockPriceDataAsyncClient == null)
+                _stockPriceDataAsyncClient = new StockPriceDataAsyncClient(_apiToken, _useProxy);
+
+            return _stockPriceDataAsyncClient.GetExchangePricesAsync(exchange, date);
+        }
+
         public Task<RealTimePrice> GetRealTimePriceAsync(string symbol)
         {
             if (symbol == null)

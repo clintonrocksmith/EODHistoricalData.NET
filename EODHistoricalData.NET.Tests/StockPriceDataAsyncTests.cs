@@ -119,5 +119,13 @@ namespace EODHistoricalData.NET.Tests
             var price = await client.GetRealTimePriceAsync(Consts.TestSymbol);
             Assert.IsNotNull(price);
         }
+        
+        [TestMethod]
+        public async Task exchange_prices_date_test()
+        {
+            using var  client = new EODHistoricalDataAsyncClient(Consts.ApiToken, true);
+            var price = await client.GetExchangeHistoricalPricesAsync(Consts.LargeExchange, Consts.OptionsTradeStartDate);
+            Assert.IsNotNull(price);
+        }
     }
 }

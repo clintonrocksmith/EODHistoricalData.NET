@@ -2,14 +2,15 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace EODHistoricalData.NET
 {
-    internal class HttpApiClient : AuthentifiedClient, IDisposable
+    internal class HttpApiAsyncClient : AuthentifiedClient, IDisposable
     {
         private readonly HttpClient _httpClient;
 
-        internal HttpApiClient(string apiToken, bool useProxy) : base(apiToken)
+        internal HttpApiAsyncClient(string apiToken, bool useProxy) : base(apiToken)
         {
             WebRequest.DefaultWebProxy.Credentials = CredentialCache.DefaultNetworkCredentials;
             if (useProxy)
@@ -25,13 +26,11 @@ namespace EODHistoricalData.NET
                 _httpClient = new HttpClient();
         }
 
-        protected delegate T QueryHandler<T>(HttpResponseMessage response);
-
-        protected T ExecuteQuery<T>(string uri, QueryHandler<T> handler)
+        protected async Task<T> ExecuteQueryAsync<T>(string uri, Func<HttpResponseMessage, Task<T>> handler)
         {
-            Polly.Retry.RetryPolicy<HttpResponseMessage> httpRetryPolicy = Policy
+            Polly.Retry.AsyncRetryPolicy<HttpResponseMessage> httpRetryPolicy = Policy
                 .HandleResult<HttpResponseMessage>(r => r.StatusCode == (HttpStatusCode)429)
-                .WaitAndRetry(new[]
+                .WaitAndRetryAsync(new[]
                 {
                     TimeSpan.FromSeconds(30),
                     TimeSpan.FromSeconds(60),
@@ -42,12 +41,12 @@ namespace EODHistoricalData.NET
                     //included for debug to see what the response is
                 });
 
-            var response = httpRetryPolicy.ExecuteAndCapture(() => _httpClient.GetAsync(uri).Result);
+            var response = await httpRetryPolicy.ExecuteAndCaptureAsync(() => _httpClient.GetAsync(uri));
 
             if (response.Outcome == OutcomeType.Successful)
             {
                 if (response.Result.IsSuccessStatusCode)
-                    return handler(response.Result);
+                    return await handler(response.Result);
 
                 throw new HttpRequestException($"There was an error while executing the HTTP query. Reason: {response.Result.ReasonPhrase}");
             }

@@ -45,31 +45,31 @@ namespace EODHistoricalData.NET
     
     public partial class IndexComposition
     {
-        public static IndexComposition FromJson(string json) => JsonConvert.DeserializeObject<IndexComposition>(json, EODHistoricalData.NET.ConverterIndexComposition.Settings);
+        public static IndexComposition FromJson(string json) => JsonSerializer.Deserialize<IndexComposition>(json, EODHistoricalData.NET.ConverterIndexComposition.Settings);
     }
 
     public static class SerializeIndexComposition
     {
-        public static string ToJson(this IndexComposition self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterIndexComposition.Settings);
+        public static string ToJson(this IndexComposition self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterIndexComposition.Settings);
     }
 
     internal static class ConverterIndexComposition
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 }

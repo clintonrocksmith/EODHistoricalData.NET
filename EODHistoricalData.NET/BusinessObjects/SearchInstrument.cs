@@ -6,72 +6,73 @@
 //
 //    var instrument = Instrument.FromJson(jsonString);
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace EODHistoricalData.NET
 {
     using System;
     using System.Collections.Generic;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public partial class SearchInstrument
     {
-        [JsonProperty("Code")]
+        [JsonPropertyName("Code")]
         public string Code { get; set; }
 
-        [JsonProperty("Name")]
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
 
-        [JsonProperty("Country")]
+        [JsonPropertyName("Country")]
         public string Country { get; set; }
 
-        [JsonProperty("Exchange")]
+        [JsonPropertyName("Exchange")]
         public string Exchange { get; set; }
 
-        [JsonProperty("Currency")]
+        [JsonPropertyName("Currency")]
         public string Currency { get; set; }
 
-        [JsonProperty("Type")]
+        [JsonPropertyName("Type")]
         public string Type { get; set; }
         
-        [JsonProperty("ISIN")]
+        [JsonPropertyName("ISIN")]
         public string Isin { get; set; }
         
-        [JsonProperty("previousClose")]
+        [JsonPropertyName("previousClose")]
         public decimal PreviousClose { get; set; }
         
-        [JsonProperty("previousCloseDate")]
+        [JsonPropertyName("previousCloseDate")]
         public DateTimeOffset PreviousCloseDate { get; set; }
     }
     
     public partial class SearchInstrument
     {
-        public static List<SearchInstrument> FromJson(string json) => JsonConvert.DeserializeObject<List<SearchInstrument>>(json, EODHistoricalData.NET.ConverterInstrument.Settings);
+        public static List<SearchInstrument> FromJson(string json) => JsonSerializer.Deserialize<List<SearchInstrument>>(json, EODHistoricalData.NET.ConverterInstrument.Settings);
     }
 
     public static class SerializeSearchInstrument
     {
-        public static string ToJson(this List<SearchInstrument> self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterInstrument.Settings);
+        public static string ToJson(this List<SearchInstrument> self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterInstrument.Settings);
     }
 
     internal static class ConverterSearchInstrument
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 }

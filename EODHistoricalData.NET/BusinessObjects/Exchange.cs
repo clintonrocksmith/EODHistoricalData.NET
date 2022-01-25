@@ -36,30 +36,30 @@ namespace EODHistoricalData.NET
 
     public partial class Exchange
     {
-        public static List<Exchange> FromJson(string json) => JsonConvert.DeserializeObject<List<Exchange>>(json, EODHistoricalData.NET.ConverterExchange.Settings);
+        public static List<Exchange> FromJson(string json) => JsonSerializer.Deserialize<List<Exchange>>(json, EODHistoricalData.NET.ConverterExchange.Settings);
     }
 
     public static class SerializeExchange
     {
-        public static string ToJson(this List<Instrument> self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterExchange.Settings);
+        public static string ToJson(this List<Instrument> self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterExchange.Settings);
     }
 
     internal static class ConverterExchange
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 }

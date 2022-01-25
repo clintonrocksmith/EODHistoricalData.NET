@@ -34,7 +34,7 @@ namespace EODHistoricalData.NET
     {
         public static List<ShareSplit> FromJson(string json)
         {
-            List<ShareSplit> splits = JsonConvert.DeserializeObject<List<ShareSplit>>(json, EODHistoricalData.NET.ConverterShareSplit.Settings);
+            List<ShareSplit> splits = JsonSerializer.Deserialize<List<ShareSplit>>(json, EODHistoricalData.NET.ConverterShareSplit.Settings);
             foreach (ShareSplit split in splits)
             {
                 string[] factors = split.Split.Split('/');
@@ -47,26 +47,26 @@ namespace EODHistoricalData.NET
 
     public static class SerializeShareSplit
     {
-        public static string ToJson(this List<ShareSplit> self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterShareSplit.Settings);
+        public static string ToJson(this List<ShareSplit> self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterShareSplit.Settings);
     }
 
     internal static class ConverterShareSplit
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 }

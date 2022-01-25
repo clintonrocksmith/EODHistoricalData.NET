@@ -189,10 +189,10 @@ namespace EODHistoricalData.NET
         [JsonPropertyName("Benchmark")]
         public decimal? Benchmark { get; set; }
 
-        [JsonPropertyName("Stock_Portfolio", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("Stock_Portfolio")] //, NullValueHandling = NullValueHandling.Ignore)]
         public decimal? StockPortfolio { get; set; }
 
-        [JsonPropertyName("Stocks_%", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("Stocks_%")] //, NullValueHandling = NullValueHandling.Ignore)]
         public decimal? Stocks { get; set; }
     }
 
@@ -213,31 +213,31 @@ namespace EODHistoricalData.NET
 
     public partial class FundamentalFund
     {
-        public static FundamentalFund FromJson(string json) => JsonConvert.DeserializeObject<FundamentalFund>(json, EODHistoricalData.NET.ConverterFundamentalFund.Settings);
+        public static FundamentalFund FromJson(string json) => JsonSerializer.Deserialize<FundamentalFund>(json, EODHistoricalData.NET.ConverterFundamentalFund.Settings);
     }
 
     public static class SerializeFundamentalFund
     {
-        public static string ToJson(this FundamentalFund self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterFundamentalFund.Settings);
+        public static string ToJson(this FundamentalFund self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterFundamentalFund.Settings);
     }
 
     internal static class ConverterFundamentalFund
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 

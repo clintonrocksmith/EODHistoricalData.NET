@@ -152,7 +152,7 @@ namespace EODHistoricalData.NET
 
         public static Options FromJson(string json)
         {
-            Options result = JsonConvert.DeserializeObject<Options>(json, EODHistoricalData.NET.Converter.Settings);
+            Options result = JsonSerializer.Deserialize<Options>(json, EODHistoricalData.NET.Converter.Settings);
             foreach (Datum datum in result.Data)
             {
                 SetLastTradeDatime(datum.Options.Call);
@@ -164,109 +164,109 @@ namespace EODHistoricalData.NET
 
     public static class Serialize
     {
-        public static string ToJson(this Options self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.Converter.Settings);
+        public static string ToJson(this Options self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.Converter.Settings);
     }
 
     internal static class Converter
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                ContractSizeConverter.Singleton,
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     ContractSizeConverter.Singleton,
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 
-    internal class ContractSizeConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(ContractSize) || t == typeof(ContractSize?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "":
-                    return ContractSize.Empty;
-                case "REGULAR":
-                    return ContractSize.Regular;
-            }
-            throw new Exception("Cannot unmarshal type ContractSize");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (ContractSize)untypedValue;
-            switch (value)
-            {
-                case ContractSize.Empty:
-                    serializer.Serialize(writer, "");
-                    return;
-                case ContractSize.Regular:
-                    serializer.Serialize(writer, "REGULAR");
-                    return;
-            }
-            throw new Exception("Cannot marshal type ContractSize");
-        }
-
-        public static readonly ContractSizeConverter Singleton = new ContractSizeConverter();
-    }
-
-    internal class OptionsTypeEnumConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(OptionsTypeEnum) || t == typeof(OptionsTypeEnum?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "CALL":
-                    return OptionsTypeEnum.Call;
-                case "PUT":
-                    return OptionsTypeEnum.Put;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (OptionsTypeEnum)untypedValue;
-            switch (value)
-            {
-                case OptionsTypeEnum.Call:
-                    serializer.Serialize(writer, "CALL");
-                    return;
-                case OptionsTypeEnum.Put:
-                    serializer.Serialize(writer, "PUT");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
-        }
-
-        public static readonly OptionsTypeEnumConverter Singleton = new OptionsTypeEnumConverter();
-    }
+    // internal class ContractSizeConverter : JsonConverter
+    // {
+    //     public override bool CanConvert(Type t) => t == typeof(ContractSize) || t == typeof(ContractSize?);
+    //
+    //     public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+    //     {
+    //         if (reader.TokenType == JsonToken.Null) return null;
+    //         var value = serializer.Deserialize<string>(reader);
+    //         switch (value)
+    //         {
+    //             case "":
+    //                 return ContractSize.Empty;
+    //             case "REGULAR":
+    //                 return ContractSize.Regular;
+    //         }
+    //         throw new Exception("Cannot unmarshal type ContractSize");
+    //     }
+    //
+    //     public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+    //     {
+    //         if (untypedValue == null)
+    //         {
+    //             serializer.Serialize(writer, null);
+    //             return;
+    //         }
+    //         var value = (ContractSize)untypedValue;
+    //         switch (value)
+    //         {
+    //             case ContractSize.Empty:
+    //                 serializer.Serialize(writer, "");
+    //                 return;
+    //             case ContractSize.Regular:
+    //                 serializer.Serialize(writer, "REGULAR");
+    //                 return;
+    //         }
+    //         throw new Exception("Cannot marshal type ContractSize");
+    //     }
+    //
+    //     public static readonly ContractSizeConverter Singleton = new ContractSizeConverter();
+    // }
+    //
+    // internal class OptionsTypeEnumConverter : JsonConverter
+    // {
+    //     public override bool CanConvert(Type t) => t == typeof(OptionsTypeEnum) || t == typeof(OptionsTypeEnum?);
+    //
+    //     public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+    //     {
+    //         if (reader.TokenType == JsonToken.Null) return null;
+    //         var value = serializer.Deserialize<string>(reader);
+    //         switch (value)
+    //         {
+    //             case "CALL":
+    //                 return OptionsTypeEnum.Call;
+    //             case "PUT":
+    //                 return OptionsTypeEnum.Put;
+    //         }
+    //         throw new Exception("Cannot unmarshal type TypeEnum");
+    //     }
+    //
+    //     public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+    //     {
+    //         if (untypedValue == null)
+    //         {
+    //             serializer.Serialize(writer, null);
+    //             return;
+    //         }
+    //         var value = (OptionsTypeEnum)untypedValue;
+    //         switch (value)
+    //         {
+    //             case OptionsTypeEnum.Call:
+    //                 serializer.Serialize(writer, "CALL");
+    //                 return;
+    //             case OptionsTypeEnum.Put:
+    //                 serializer.Serialize(writer, "PUT");
+    //                 return;
+    //         }
+    //         throw new Exception("Cannot marshal type TypeEnum");
+    //     }
+    //
+    //     public static readonly OptionsTypeEnumConverter Singleton = new OptionsTypeEnumConverter();
+    // }
 }

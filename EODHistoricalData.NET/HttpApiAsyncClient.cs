@@ -1,8 +1,8 @@
-﻿using Polly;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Polly;
 
 namespace EODHistoricalData.NET
 {

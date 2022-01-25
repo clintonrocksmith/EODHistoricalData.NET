@@ -40,34 +40,34 @@ namespace EODHistoricalData.NET
 
     public partial class HistoricalPrice
     {
-        public static HistoricalPrice FromJson(string json) => JsonConvert.DeserializeObject<HistoricalPrice>(json, EODHistoricalData.NET.ConverterHistoricalPrice.Settings);
+        public static HistoricalPrice FromJson(string json) => JsonSerializer.Deserialize<HistoricalPrice>(json, EODHistoricalData.NET.ConverterHistoricalPrice.Settings);
 
-        public static List<HistoricalPrice> GetListFromJson(string json) => JsonConvert.DeserializeObject<List<HistoricalPrice>>(json, EODHistoricalData.NET.ConverterHistoricalPrice.Settings);
+        public static List<HistoricalPrice> GetListFromJson(string json) => JsonSerializer.Deserialize<List<HistoricalPrice>>(json, EODHistoricalData.NET.ConverterHistoricalPrice.Settings);
 
     }
 
     public static class SerializeHistoricalPrice
     {
-        public static string ToJson(this HistoricalPrice self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterHistoricalPrice.Settings);
+        public static string ToJson(this HistoricalPrice self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterHistoricalPrice.Settings);
     }
 
     internal static class ConverterHistoricalPrice
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 }

@@ -44,31 +44,31 @@ namespace EODHistoricalData.NET
 
     public partial class Dividend
     {
-        public static List<Dividend> FromJson(string json) => JsonConvert.DeserializeObject<List<Dividend>>(json, EODHistoricalData.NET.ConverterDividend.Settings);
+        public static List<Dividend> FromJson(string json) => JsonSerializer.Deserialize<List<Dividend>>(json, EODHistoricalData.NET.ConverterDividend.Settings);
     }
 
     public static class SerializeDividend
     {
-        public static string ToJson(this List<Dividend> self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterDividend.Settings);
+        public static string ToJson(this List<Dividend> self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterDividend.Settings);
     }
 
     internal static class ConverterDividend
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 }

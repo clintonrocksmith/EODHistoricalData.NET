@@ -76,85 +76,85 @@ namespace EODHistoricalData.NET
 
     public partial class Ipos
     {
-        public static Ipos FromJson(string json) => JsonConvert.DeserializeObject<Ipos>(json, EODHistoricalData.NET.ConverterIpos.Settings);
+        public static Ipos FromJson(string json) => JsonSerializer.Deserialize<Ipos>(json, EODHistoricalData.NET.ConverterIpos.Settings);
     }
 
     public static class SerializeIpos
     {
-        public static string ToJson(this Ipos self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterIpos.Settings);
+        public static string ToJson(this Ipos self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterIpos.Settings);
     }
 
     internal static class ConverterIpos
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                DealTypeConverter.Singleton,
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     DealTypeConverter.Singleton,
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+            //     new NullConverter(),
+            // },
+            // Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            // {
+            //     Errors.Add(args.ErrorContext.Error.Message);
+            //     args.ErrorContext.Handled = true;
+            // },
         };
     }
 
-    internal class DealTypeConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(DealType) || t == typeof(DealType?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "Amended":
-                    return DealType.Amended;
-                case "Expected":
-                    return DealType.Expected;
-                case "Filed":
-                    return DealType.Filed;
-                case "Priced":
-                    return DealType.Priced;
-                case "Withdrawn":
-                    return DealType.Withdrawn;
-            }
-            throw new Exception("Cannot unmarshal type DealType");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (DealType)untypedValue;
-            switch (value)
-            {
-                case DealType.Amended:
-                    serializer.Serialize(writer, "Amended");
-                    return;
-                case DealType.Expected:
-                    serializer.Serialize(writer, "Expected");
-                    return;
-                case DealType.Filed:
-                    serializer.Serialize(writer, "Filed");
-                    return;
-                case DealType.Priced:
-                    serializer.Serialize(writer, "Priced");
-                    return;
-            }
-            throw new Exception("Cannot marshal type DealType");
-        }
-
-        public static readonly DealTypeConverter Singleton = new DealTypeConverter();
-    }
+    // internal class DealTypeConverter : JsonConverter
+    // {
+    //     public override bool CanConvert(Type t) => t == typeof(DealType) || t == typeof(DealType?);
+    //
+    //     public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+    //     {
+    //         if (reader.TokenType == JsonToken.Null) return null;
+    //         var value = serializer.Deserialize<string>(reader);
+    //         switch (value)
+    //         {
+    //             case "Amended":
+    //                 return DealType.Amended;
+    //             case "Expected":
+    //                 return DealType.Expected;
+    //             case "Filed":
+    //                 return DealType.Filed;
+    //             case "Priced":
+    //                 return DealType.Priced;
+    //             case "Withdrawn":
+    //                 return DealType.Withdrawn;
+    //         }
+    //         throw new Exception("Cannot unmarshal type DealType");
+    //     }
+    //
+    //     public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+    //     {
+    //         if (untypedValue == null)
+    //         {
+    //             serializer.Serialize(writer, null);
+    //             return;
+    //         }
+    //         var value = (DealType)untypedValue;
+    //         switch (value)
+    //         {
+    //             case DealType.Amended:
+    //                 serializer.Serialize(writer, "Amended");
+    //                 return;
+    //             case DealType.Expected:
+    //                 serializer.Serialize(writer, "Expected");
+    //                 return;
+    //             case DealType.Filed:
+    //                 serializer.Serialize(writer, "Filed");
+    //                 return;
+    //             case DealType.Priced:
+    //                 serializer.Serialize(writer, "Priced");
+    //                 return;
+    //         }
+    //         throw new Exception("Cannot marshal type DealType");
+    //     }
+    //
+    //     public static readonly DealTypeConverter Singleton = new DealTypeConverter();
+    // }
 }

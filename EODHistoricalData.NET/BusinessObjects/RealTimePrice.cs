@@ -61,7 +61,7 @@ namespace EODHistoricalData.NET
     {
         public static RealTimePrice FromJson(string json)
         {
-            RealTimePrice result = JsonConvert.DeserializeObject<RealTimePrice>(json, EODHistoricalData.NET.ConverterRealTimePrice.Settings);
+            RealTimePrice result = JsonSerializer.Deserialize<RealTimePrice>(json, EODHistoricalData.NET.ConverterRealTimePrice.Settings);
             result.ErrorMessages = ConverterRealTimePrice.Errors;
             result.TimestampAsDateTime = DateTimeOffset.FromUnixTimeSeconds(result.Timestamp).DateTime;
             return result;
@@ -70,11 +70,11 @@ namespace EODHistoricalData.NET
 
     public static class SerializeRealTimePrice
     {
-        public static string ToJson(this RealTimePrice self) => JsonConvert.SerializeObject(self, EODHistoricalData.NET.ConverterRealTimePrice.Settings);
+        public static string ToJson(this RealTimePrice self) => JsonSerializer.Serialize(self, EODHistoricalData.NET.ConverterRealTimePrice.Settings);
 
         public static List<RealTimePrice> GetListFromJson(string json)
         {
-            List<RealTimePrice> prices = JsonConvert.DeserializeObject<List<RealTimePrice>>(json, EODHistoricalData.NET.ConverterRealTimePrice.Settings);
+            List<RealTimePrice> prices = JsonSerializer.Deserialize<List<RealTimePrice>>(json, EODHistoricalData.NET.ConverterRealTimePrice.Settings);
             prices.ForEach(x => x.TimestampAsDateTime = DateTimeOffset.FromUnixTimeSeconds(x.Timestamp).DateTime);
             return prices;
         }
@@ -83,20 +83,20 @@ namespace EODHistoricalData.NET
     internal static class ConverterRealTimePrice
     {
         public static List<string> Errors = new List<string>();
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new JsonSerializerOptions
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
-                new NullConverter(),
-            },
-            Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
-            {
-                Errors.Add(args.ErrorContext.Error.Message);
-                args.ErrorContext.Handled = true;
-            },
+        //     MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+        //     DateParseHandling = DateParseHandling.None,
+        //     Converters =
+        //     {
+        //         new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+        //         new NullConverter(),
+        //     },
+        //     Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+        //     {
+        //         Errors.Add(args.ErrorContext.Error.Message);
+        //         args.ErrorContext.Handled = true;
+        //     },
         };
     }
 }

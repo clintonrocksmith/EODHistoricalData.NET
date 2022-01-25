@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace EODHistoricalData.NET.BusinessObjects
 {
@@ -87,40 +88,40 @@ namespace EODHistoricalData.NET.BusinessObjects
         /// <summary>
         /// Returns true or false if the listing is no longer traded
         /// </summary>
-        [JsonProperty("IsDelisted")]
+        [JsonPropertyName("IsDelisted")]
         public bool IsDelisted { get; set; }
         
         /// <summary>
         /// The date that the listing was no longer traded
         /// </summary>
-        [JsonProperty("DelistedDate")]
+        [JsonPropertyName("DelistedDate")]
         public DateTimeOffset? DelistedDate { get; set; }
         
         /// <summary>
         /// The Address in a human readable form
         /// </summary>
-        [JsonProperty("Address")]
+        [JsonPropertyName("Address")]
         public string Address { get; set; }
 
         /// <summary>
         /// The Data for the Address
         /// </summary>
-        [JsonProperty("AddressData")]
+        [JsonPropertyName("AddressData")]
         public AddressData AddressData { get; set; }
 
         /// <summary>
         /// The different listings on different exchanges
         /// </summary>
-        [JsonProperty("Listings")] 
+        [JsonPropertyName("Listings")] 
         public Dictionary<int, Listing> Listings { get; set; }
 
         /// <summary>
         /// The officers for the listing if known
         /// </summary>
-        [JsonProperty("Officers")] 
+        [JsonPropertyName("Officers")] 
         public Dictionary<int, Officer> Officers { get; set; }
         
-        [JsonProperty("Phone")]
+        [JsonPropertyName("Phone")]
         public string Phone { get; set; }
 
         [JsonPropertyName("WebURL")]
@@ -141,25 +142,25 @@ namespace EODHistoricalData.NET.BusinessObjects
         /// <summary>
         /// The Number and Name of the street
         /// </summary>
-        [JsonProperty("Street")]
+        [JsonPropertyName("Street")]
         public string Street { get; set; }
         
         /// <summary>
         /// The City of the Address
         /// </summary>
-        [JsonProperty("City")]
+        [JsonPropertyName("City")]
         public string City { get; set; }
         
         /// <summary>
         /// The Country of the Address
         /// </summary>
-        [JsonProperty("Country")]
+        [JsonPropertyName("Country")]
         public string Country { get; set; }
         
         /// <summary>
         /// The Zip or Postcode of the Address
         /// </summary>
-        [JsonProperty("ZIP")]
+        [JsonPropertyName("ZIP")]
         public string ZIP { get; set; }
         
     }
@@ -169,20 +170,20 @@ namespace EODHistoricalData.NET.BusinessObjects
         /// <summary>
         /// The Stock Code
         /// </summary>
-        [JsonProperty("Code")]
+        [JsonPropertyName("Code")]
         public string Code { get; set; }
         
         /// <summary>
         /// The Exchange if known
         /// Can be empty or null
         /// </summary>
-        [JsonProperty("Exchange")]
+        [JsonPropertyName("Exchange")]
         public string Exchange { get; set; }
         
         /// <summary>
         /// The Alternative Name for the Company 
         /// </summary>
-        [JsonProperty("Name")]
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
     }
 
@@ -192,20 +193,20 @@ namespace EODHistoricalData.NET.BusinessObjects
         /// The Name of the person including their salutation
         /// example: Ms. Charlotte  Emery
         /// </summary>
-        [JsonProperty("Name")]
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
         
         /// <summary>
         /// The Title the person held
         /// </summary>
-        [JsonProperty("Title")]
+        [JsonPropertyName("Title")]
         public string Title { get; set; }
         
         /// <summary>
         /// The year that the person was born if known
         /// If Unknown returns "NA" and could be null or empty
         /// </summary>
-        [JsonProperty("YearBorn")]
+        [JsonPropertyName("YearBorn")]
         public string YearBorn { get; set; }
     }
 }
